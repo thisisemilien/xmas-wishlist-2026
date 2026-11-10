@@ -183,8 +183,11 @@ function extractSpecs(gift) {
 }
 
 // ============================================================================
-// DATA PERSISTENCE
+// DATA PERSISTENCE (Supabase Cloud Sync + Local Server + LocalStorage)
 // ============================================================================
+
+const SUPABASE_URL = "https://abjxlyoxjqtaxtoscxof.supabase.co";
+const SUPABASE_KEY = "sb_publishable_dPOGj-HXuhVtYb4m2RcwLQ_ck5vpFHt";
 
 async function loadInitialData() {
   try {
@@ -206,7 +209,6 @@ async function loadInitialData() {
       if (decoded.profile) {
         state.profile = { ...DEFAULT_PROFILE, ...decoded.profile };
       }
-      document.getElementById("toggleEditModeBtn").classList.add("hidden");
       renderAll();
       return;
     } catch (err) {
@@ -214,7 +216,44 @@ async function loadInitialData() {
     }
   }
 
-  // Try localStorage first if the user already added items in browser
+  // 1. Try Supabase Cloud Database first (so edits made online are visible to everyone!)
+  try {
+    const sbRes = await fetch(
+      `${SUPABASE_URL}/rest/v1/xmas_wishlist_2026?id=eq.emilien&select=gifts,profile`,
+      {
+        headers: {
+          apikey: SUPABASE_KEY,
+          Authorization: `Bearer ${SUPABASE_KEY}`
+        },
+        cache: "no-store"
+      }
+    );
+    if (sbRes.ok) {
+      const rows = await sbRes.json();
+      if (Array.isArray(rows) && rows.length > 0) {
+        if (Array.isArray(rows[0].gifts) && rows[0].gifts.length > 0) {
+          state.gifts = rows[0].gifts;
+          localStorage.setItem(STORAGE_KEY_GIFTS, JSON.stringify(state.gifts));
+        }
+        if (rows[0].profile && Object.keys(rows[0].profile).length > 0) {
+          state.profile = { ...DEFAULT_PROFILE, ...rows[0].profile };
+          localStorage.setItem(STORAGE_KEY_PROFILE, JSON.stringify(state.profile));
+        }
+        // Check if local server is also running
+        fetch("/api/gifts", { method: "HEAD" })
+          .then((r) => {
+            if (r.ok) state.serverAvailable = true;
+          })
+          .catch(() => {});
+        renderAll();
+        return;
+      }
+    }
+  } catch (e) {
+    console.warn("Supabase non joignable, fallback local", e);
+  }
+
+  // 2. Try localStorage if available
   let localItems = null;
   try {
     const raw =
@@ -225,7 +264,7 @@ async function loadInitialData() {
     }
   } catch (e) {}
 
-  // Try Python API (/api/gifts)
+  // 3. Try Python API (/api/gifts)
   try {
     const res = await fetch("/api/gifts", { cache: "no-store" });
     if (res.ok) {
@@ -242,7 +281,7 @@ async function loadInitialData() {
     }
   } catch (e) {}
 
-  // Try static gifts.json (Cloudflare Pages / GitHub Pages / Netlify static hosting)
+  // 4. Try static gifts.json
   try {
     const res = await fetch("gifts.json", { cache: "no-store" });
     if (res.ok) {
@@ -267,6 +306,27 @@ async function loadInitialData() {
 
 async function persistGifts() {
   localStorage.setItem(STORAGE_KEY_GIFTS, JSON.stringify(state.gifts));
+
+  // Save to Supabase Cloud so online changes are immediately live for everyone
+  try {
+    await fetch(`${SUPABASE_URL}/rest/v1/xmas_wishlist_2026?id=eq.emilien`, {
+      method: "PATCH",
+      headers: {
+        apikey: SUPABASE_KEY,
+        Authorization: `Bearer ${SUPABASE_KEY}`,
+        "Content-Type": "application/json",
+        Prefer: "return=minimal"
+      },
+      body: JSON.stringify({
+        gifts: state.gifts,
+        profile: state.profile,
+        updated_at: new Date().toISOString()
+      })
+    });
+  } catch (e) {
+    console.warn("Erreur sauvegarde cloud Supabase", e);
+  }
+
   if (state.serverAvailable) {
     try {
       await fetch("/api/gifts/replace", {
@@ -727,23 +787,7 @@ function openGiftModal(giftId = null) {
 // INITIALIZE EVENTS
 // ============================================================================
 
-function isCreatorEnvironment() {
-  const host = window.location.hostname;
-  const params = new URLSearchParams(window.location.search);
-  return (
-    host === "localhost" ||
-    host === "127.0.0.1" ||
-    window.location.protocol === "file:" ||
-    params.has("admin")
-  );
-}
-
 document.addEventListener("DOMContentLoaded", () => {
-  if (!isCreatorEnvironment()) {
-    document.getElementById("shareListBtn")?.classList.add("hidden");
-    document.getElementById("toggleEditModeBtn")?.classList.add("hidden");
-  }
-
   loadInitialData();
 
   document.getElementById("toggleEditModeBtn").addEventListener("click", () => {
@@ -979,12 +1023,13 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("profileModal").classList.add("hidden");
   });
 
-  document.getElementById("profileForm").addEventListener("submit", (e) => {
+  document.getElementById("profileForm").addEventListener("submit", async (e) => {
     e.preventDefault();
     state.profile.edition = document.getElementById("profileEditionInput").value.trim();
     state.profile.owner = document.getElementById("profileOwnerInput").value.trim();
     state.profile.subtitle = document.getElementById("profileSubtitleInput").value.trim();
     localStorage.setItem(STORAGE_KEY_PROFILE, JSON.stringify(state.profile));
+    await persistGifts();
     document.getElementById("profileModal").classList.add("hidden");
     renderProfile();
     showToast("Carte mise à jour");
