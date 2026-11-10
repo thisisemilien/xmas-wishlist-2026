@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Émilien's Xmas Wishlist — 2026 Edition</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- High-Fashion Editorial Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=8" />
+</head>
+<body>
+
+  <!-- Tactile SVG Paper Grain Overlay -->
+  <div class="paper-grain-overlay" aria-hidden="true"></div>
+
+  <!-- TOP EDITORIAL NAVIGATION (Deep Velvet Burgundy) -->
+  <header class="editorial-nav">
+    <div class="nav-container">
+      <div class="nav-left">
+        <span class="nav-code" id="navEdition">XMAS 2026</span>
+      </div>
+
+      <div class="nav-center" id="navSignature">Émilien</div>
+
+      <div class="nav-right">
+        <button type="button" id="shareListBtn" class="nav-link-btn">
+          <span>Partager</span>
+        </button>
+        <button type="button" id="toggleEditModeBtn" class="nav-pill-btn">
+          <span id="editModeLabel">Éditer la liste</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- LUXURY VELVET CAMPAIGN HERO -->
+  <section class="campaign-hero">
+    <!-- Subtle Debossed Watermark Typography -->
+    <div class="debossed-bg" aria-hidden="true">
+      <div class="debossed-row">XMAS WISHLIST 2026 EDITION</div>
+      <div class="debossed-row">HOLIDAY CURATION HOLIDAY</div>
+      <div class="debossed-row">XMAS WISHLIST 2026 EDITION</div>
+    </div>
+
+    <div class="hero-frame">
+      <!-- Top Editorial Metadata -->
+      <div class="hero-top-meta">
+        <span id="heroEdition">2026 EDITION</span>
+      </div>
+
+      <!-- High-Fashion Title Lockup -->
+      <div class="hero-title-lockup">
+        <span class="hero-eyebrow" id="heroOwner">Émilien’s</span>
+        <h1 class="hero-main-title">XMAS WISHLIST</h1>
+      </div>
+
+      <!-- Creator Toolbar (Only visible when editing) -->
+      <div id="creatorToolbar" class="creator-toolbar hidden">
+        <button type="button" id="openAddModalBtn" class="btn-cream">
+          + Ajouter un souhait
+        </button>
+        <button type="button" id="customizeProfileBtn" class="btn-outline-cream">
+          Modifier l’en-tête
+        </button>
+      </div>
+    </div>
+
+    <!-- Scalloped Paper Edge Transition -->
+    <div class="scallop-divider-bottom" aria-hidden="true"></div>
+  </section>
+
+  <!-- CURATION FILTER BAR -->
+  <section class="curation-bar-section">
+    <div class="moodboard-container">
+      <div class="curation-bar">
+        <div class="curation-categories" id="categoryPills" role="tablist">
+          <button type="button" class="curation-tab active" data-category="all">All Pieces</button>
+        </div>
+
+        <div class="curation-sorts">
+          <select id="budgetFilter" class="minimal-select" aria-label="Budget">
+            <option value="all">Tous les prix</option>
+            <option value="under-100">— 100 €</option>
+            <option value="100-300">100 € – 300 €</option>
+            <option value="over-300">+ 300 €</option>
+          </select>
+
+          <select id="sortFilter" class="minimal-select" aria-label="Tri">
+            <option value="default">Sélection</option>
+            <option value="price-asc">Prix ↑</option>
+            <option value="price-desc">Prix ↓</option>
+            <option value="discount">Promos %</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MOODBOARD & POSTAGE-STAMP WISHLIST GRID -->
+  <main class="moodboard-main">
+    <div class="moodboard-container">
+      <div id="giftsGrid" class="stamp-grid">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+
+      <!-- Empty Filter State -->
+      <div id="emptyState" class="empty-cotton-box hidden">
+        <p class="empty-serif">Aucune pièce dans cette sélection</p>
+        <button type="button" id="resetFiltersBtn" class="btn-cotton">Afficher toute la liste</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- EDITORIAL FOOTER -->
+  <footer class="cotton-footer">
+    <div class="moodboard-container footer-inner">
+      <div class="footer-center">
+        <span class="footer-signature">Émilien’s Xmas Wishlist</span>
+        <span class="footer-edition">2026 EDITION</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =====================================================================
+       MODAL 1: ADD / EDIT WISH
+       ===================================================================== -->
+  <div id="giftModal" class="modal-backdrop hidden" aria-hidden="true">
+    <div class="modal-paper modal-lg" role="dialog" aria-labelledby="giftModalTitle">
+      <div class="modal-header">
+        <div>
+          <span class="modal-kicker">CURATION</span>
+          <h2 id="giftModalTitle" class="modal-title">Ajouter un souhait</h2>
+        </div>
+        <button type="button" class="modal-close" id="closeGiftModalBtn" aria-label="Fermer">✕</button>
+      </div>
+
+      <form id="giftForm" class="modal-body">
+        <input type="hidden" id="giftIdInput" />
+
+        <!-- Quick URL Autofill -->
+        <div class="autofill-strip">
+          <label for="magicUrlInput" class="input-label">Import automatique depuis un lien (Amazon, Fnac, Apple, Diptyque...)</label>
+          <div class="autofill-row">
+            <input type="url" id="magicUrlInput" class="paper-input" placeholder="https://..." />
+            <button type="button" id="extractUrlBtn" class="btn-crimson-sm">Extraire</button>
+          </div>
+          <span id="extractUrlStatus" class="input-hint">Récupère l'image, le titre et la boutique automatiquement.</span>
+        </div>
+
+        <div class="grid-2-cols">
+          <div class="input-group">
+            <label for="giftTitleInput" class="input-label">Nom de la pièce *</label>
+            <input type="text" id="giftTitleInput" class="paper-input" required placeholder="Ex: Coque Tissage Technique — iPhone 18 Pro Max" />
+          </div>
+
+          <div class="input-group">
+            <label for="giftCategoryInput" class="input-label">Catégorie *</label>
+            <input type="text" id="giftCategoryInput" class="paper-input" list="categorySuggestions" required placeholder="Ex: Mode & Accessoires" />
+            <datalist id="categorySuggestions">
+              <option value="Mode & Accessoires"></option>
+              <option value="Tech & Audio"></option>
+              <option value="Maison & Déco"></option>
+              <option value="Beauté & Parfums"></option>
+              <option value="Culture & Livres"></option>
+              <option value="Gastronomie"></option>
+            </datalist>
+          </div>
+        </div>
+
+        <div class="grid-2-cols">
+          <div class="input-group">
+            <label for="giftPriorityInput" class="input-label">Mention</label>
+            <select id="giftPriorityInput" class="paper-input">
+              <option value="Most Wanted">Most Wanted</option>
+              <option value="Coup de cœur">Coup de cœur</option>
+              <option value="Idée cadeau">Idée cadeau</option>
+              <option value="Édition Limitée">Édition Limitée</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label for="giftImageInput" class="input-label">URL de la photo *</label>
+            <input type="url" id="giftImageInput" class="paper-input" placeholder="https://..." />
+          </div>
+        </div>
+
+        <div class="grid-3-cols">
+          <div class="input-group">
+            <label for="giftColorInput" class="input-label">Couleur / Finition</label>
+            <input type="text" id="giftColorInput" class="paper-input" placeholder="Ex: Noir Intense, Bourgogne..." />
+          </div>
+
+          <div class="input-group">
+            <label for="giftSizeInput" class="input-label">Taille / Pointure</label>
+            <input type="text" id="giftSizeInput" class="paper-input" placeholder="Ex: XS, 41, 190g..." />
+          </div>
+
+          <div class="input-group">
+            <label for="giftFitInput" class="input-label">Cadrage photo</label>
+            <select id="giftFitInput" class="paper-input">
+              <option value="portrait">Portrait plein cadre (Mode / Souliers)</option>
+              <option value="contain">Objet détouré (Fond studio / Tech)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="giftDescInput" class="input-label">Note additionnelle (optionnel)</label>
+          <input type="text" id="giftDescInput" class="paper-input" placeholder="Ex: Coupe slim, édition reliée..." />
+        </div>
+
+        <!-- Stores & Prices -->
+        <div class="stores-box">
+          <div class="stores-box-header">
+            <div>
+              <h3 class="stores-box-title">Boutiques, Prix, Réductions & Codes Promo</h3>
+              <p class="input-hint">Entrez un % de réduction pour calculer automatiquement le prix final (ou inversement). Ajoutez un code promo et/ou une date de fin si vous en avez.</p>
+            </div>
+            <button type="button" id="addStoreRowBtn" class="btn-cotton-sm">+ Ajouter un site</button>
+          </div>
+
+          <div class="store-row-labels">
+            <span>Boutique *</span>
+            <span>Prix initial</span>
+            <span>Réduc (%)</span>
+            <span>Prix final *</span>
+            <span>Code promo</span>
+            <span>Fin promo</span>
+            <span>Lien marchand</span>
+            <span></span>
+          </div>
+
+          <div id="storesContainer" class="stores-rows"></div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" id="cancelGiftModalBtn" class="btn-text">Annuler</button>
+          <button type="submit" class="btn-crimson">Enregistrer sur ma liste</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       MODAL 2: SHARE & EXPORT
+       ===================================================================== -->
+  <div id="shareModal" class="modal-backdrop hidden" aria-hidden="true">
+    <div class="modal-paper modal-md" role="dialog" aria-labelledby="shareModalTitle">
+      <div class="modal-header">
+        <div>
+          <span class="modal-kicker">SHARE</span>
+          <h2 id="shareModalTitle" class="modal-title">Partager ma Wishlist</h2>
+        </div>
+        <button type="button" class="modal-close" id="closeShareModalBtn" aria-label="Fermer">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="share-card">
+          <h4>Lien direct (Lecture seule pour vos proches)</h4>
+          <p class="input-hint">Ce lien embarque toute votre wishlist actuelle. Vos proches verront directement la liste sans les boutons d’édition.</p>
+          <div class="autofill-row">
+            <input type="text" id="shareUrlInput" class="paper-input" readonly />
+            <button type="button" id="copyShareUrlBtn" class="btn-crimson-sm">Copier</button>
+          </div>
+        </div>
+
+        <div class="share-card">
+          <h4>Sauvegarde du fichier <code>gifts.json</code></h4>
+          <p class="input-hint">Téléchargez ou importez votre fichier JSON pour sauvegarder vos données.</p>
+          <div class="share-btns">
+            <button type="button" id="exportJsonBtn" class="btn-cotton-sm">Télécharger gifts.json</button>
+            <label class="btn-cotton-sm file-upload-btn">
+              Importer un JSON
+              <input type="file" id="importJsonInput" accept=".json" hidden />
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       MODAL 3: CUSTOMIZE HEADER
+       ===================================================================== -->
+  <div id="profileModal" class="modal-backdrop hidden" aria-hidden="true">
+    <div class="modal-paper modal-sm" role="dialog" aria-labelledby="profileModalTitle">
+      <div class="modal-header">
+        <div>
+          <span class="modal-kicker">HEADER</span>
+          <h2 id="profileModalTitle" class="modal-title">Textes d’en-tête</h2>
+        </div>
+        <button type="button" class="modal-close" id="closeProfileModalBtn" aria-label="Fermer">✕</button>
+      </div>
+
+      <form id="profileForm" class="modal-body">
+        <div class="input-group">
+          <label for="profileEditionInput" class="input-label">Mention Édition</label>
+          <input type="text" id="profileEditionInput" class="paper-input" required />
+        </div>
+        <div class="input-group">
+          <label for="profileOwnerInput" class="input-label">Sur-titre (ex: ÉMILIEN'S)</label>
+          <input type="text" id="profileOwnerInput" class="paper-input" required />
+        </div>
+        <div class="input-group">
+          <label for="profileSubtitleInput" class="input-label">Note d’introduction</label>
+          <textarea id="profileSubtitleInput" class="paper-input" rows="3" required></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="cancelProfileModalBtn" class="btn-text">Annuler</button>
+          <button type="submit" class="btn-crimson">Enregistrer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast" class="toast-pill hidden" role="status" aria-live="polite"></div>
+
+  <script src="app.js?v=9"></script>
+</body>
+</html>
