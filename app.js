@@ -336,10 +336,11 @@ async function loadInitialData() {
 
 async function persistGifts() {
   localStorage.setItem(STORAGE_KEY_GIFTS, JSON.stringify(state.gifts));
+  localStorage.setItem(STORAGE_KEY_GIFTS + "_backup", JSON.stringify(state.gifts));
 
   // Save to Supabase Cloud so online changes are immediately live for everyone
   try {
-    await fetch(`${SUPABASE_URL}/rest/v1/xmas_wishlist_2026?id=eq.emilien`, {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/xmas_wishlist_2026?id=eq.emilien`, {
       method: "PATCH",
       headers: {
         apikey: SUPABASE_KEY,
@@ -353,6 +354,10 @@ async function persistGifts() {
         updated_at: new Date().toISOString()
       })
     });
+    if (!res.ok) {
+      console.error("Erreur Supabase PATCH:", res.status, await res.text());
+      showToast("Erreur de synchronisation cloud");
+    }
   } catch (e) {
     console.warn("Erreur sauvegarde cloud Supabase", e);
   }
