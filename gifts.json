@@ -108,5 +108,115 @@
         "url": "https://www.amazon.fr/Apple-Tissage-Technique-MagSafe-iPhone/dp/B0HJ9QMTYM/ref=sr_1_5?__mk_fr_FR=ÅMÅŽÕÑ&crid=11AMRI8M5VILD&dib=eyJ2IjoiMSJ9.bmJMxXuhLdfnSsF_VD52xKE1aE8F3E4NAUJfBjbM-hMsxhk6friOKEzrUr-z2QXEk_EsvF3HM-YdEnnmR4C3nOCULCYB7fde6euXDa12ufHxwzkvGUts3Q8z4Cud3vOPTcRjWAdBtVLIb3n2hhiuxdB05qm4azskw8QgcZMnDxNSOQUqQZ4sXu10C1rPgM4qmQDLRS7jNViLugAGzWfk4UUaYS1h1HhcxwYqCZine5fGlrO99Kn6y1-0JGUE0ukJP02CDcmU0sUPRUDHwSf46F6urKkb_tA18Gt2t98mGLg.qR8zyqxbw9WfKqP2kFn9RFr-bf8b29HVUyspvkEJuH8&dib_tag=se&keywords=Coque%2BiPhone%2B18%2BPro%2BMax&qid=1794162238&s=electronics&sprefix=coque%2Biphone%2B18%2Bpro%2Bmax%2Celectronics%2C155&sr=1-5&th=1"
       }
     ]
+  },
+  {
+    "id": "gift-1794667700001",
+    "title": "Écouteurs sans fil AirPods Pro 3",
+    "category": "Tech & Audio",
+    "priority": "Idée cadeau",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/airpods-pro-3-hero-select-202509_FMT_WHH?wid=752&hei=636&fmt=jpeg&qlt=90&.v=1758077264181",
+    "color": "Blanc",
+    "size": "",
+    "imageFit": "contain",
+    "description": "",
+    "stores": [
+      {
+        "name": "Carrefour",
+        "price": 249.99,
+        "originalPrice": 279,
+        "discountPercent": 10,
+        "promoCode": "",
+        "promoEndDate": "",
+        "url": "https://www.carrefour.fr/p/ecouteurs-sans-fil-airpods-pro-3-apple-0195950543742?s=7006"
+      }
+    ]
+  },
+  {
+    "id": "gift-1794667700002",
+    "title": "The Weeknd — The Highlights (Vinyle 2xLP)",
+    "category": "Culture & Livres",
+    "priority": "Idée cadeau",
+    "image": "https://i.discogs.com/G8qaE6WyOpq25lBxGgveYoh1lMEdE2n5qt6mgkigUy8/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIxMDQ0/NzEzLTE2Mzc1NjQx/MTQtODE5Ny5qcGVn.jpeg",
+    "color": "Rouge (Édition Limitée)",
+    "size": "",
+    "imageFit": "contain",
+    "description": "",
+    "stores": [
+      {
+        "name": "Discogs",
+        "price": 24.5,
+        "originalPrice": null,
+        "discountPercent": null,
+        "promoCode": "",
+        "promoEndDate": "",
+        "url": "https://www.discogs.com/shop/item/4438607685"
+      }
+    ]
+  },
+  {
+    "id": "gift-1794667700003",
+    "title": "SKIMS Classic Cotton Rib Brief",
+    "category": "Mode & Accessoires",
+    "priority": "Idée cadeau",
+    "image": "https://cdn.shopify.com/s/files/1/1011/8339/0034/files/411eba193d8c73cfe2bcc0bce4f181b4c64c4e20.jpg?v=1788520639",
+    "color": "Light Heather Grey",
+    "size": "S",
+    "imageFit": "portrait",
+    "description": "",
+    "stores": [
+      {
+        "name": "END.",
+        "price": 24.65,
+        "originalPrice": 29,
+        "discountPercent": 15,
+        "promoCode": "APP15",
+        "promoEndDate": "",
+        "url": "https://www.endclothing.com/en-eu/products/skims-classic-cotton-rib-brief-br-brf-11924m-lhg?variant=54520776294738"
+      }
+    ]
+  },
+  {
+    "id": "gift-1794667700004",
+    "title": "SKIMS Classic Cotton Rib Brief",
+    "category": "Mode & Accessoires",
+    "priority": "Idée cadeau",
+    "image": "https://cdn.shopify.com/s/files/1/1011/8339/0034/files/552ecf9c38bc7b5dbddeef59e9a77c1345eb19fb.jpg?v=1788520412",
+    "color": "Chalk",
+    "size": "S",
+    "imageFit": "portrait",
+    "description": "",
+    "stores": [
+      {
+        "name": "END.",
+        "price": 24.65,
+        "originalPrice": 29,
+        "discountPercent": 15,
+        "promoCode": "APP15",
+        "promoEndDate": "",
+        "url": "https://www.endclothing.com/en-eu/products/skims-classic-cotton-rib-brief-br-brf-11924m-chk"
+      }
+    ]
+  },
+  {
+    "id": "gift-1794667700005",
+    "title": "Henley à manches longues SKIMS",
+    "category": "Mode & Accessoires",
+    "priority": "Idée cadeau",
+    "image": "https://skims.imgix.net/s/files/1/0259/5448/4284/files/SKIMS-LOUNGEWEAR-TP-LSL-11927M-JUN-FLT.jpg?v=1786402572&auto=format%2Ccompress&w=2000&h=2000&q=70",
+    "color": "Jungle (Kaki)",
+    "size": "XS",
+    "imageFit": "portrait",
+    "description": "",
+    "stores": [
+      {
+        "name": "Galeries Lafayette",
+        "price": 55.8,
+        "originalPrice": 62,
+        "discountPercent": 10,
+        "promoCode": "STUDENT10",
+        "promoEndDate": "",
+        "url": "https://www.galerieslafayette.com/p/henley+a+manches+longues-skims/2013233221717/403274"
+      }
+    ]
   }
 ]
