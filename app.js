@@ -216,6 +216,33 @@ async function loadInitialData() {
     }
   }
 
+  // 0. Load local browser items first so we never lose unsynced local additions
+  let localItems = [];
+  try {
+    const raw =
+      localStorage.getItem(STORAGE_KEY_GIFTS) ||
+      localStorage.getItem("noel_wishlist_gifts_v1");
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed)) localItems = parsed;
+    }
+  } catch (e) {}
+
+  // Helper to merge two gift lists without losing any item
+  const mergeGiftLists = (primary, secondary) => {
+    const map = new Map();
+    // Put local items first if local has more items, otherwise primary first
+    const base = secondary.length > primary.length ? secondary : primary;
+    const extra = secondary.length > primary.length ? primary : secondary;
+    base.forEach((g) => {
+      if (g && g.id) map.set(g.id, g);
+    });
+    extra.forEach((g) => {
+      if (g && g.id && !map.has(g.id)) map.set(g.id, g);
+    });
+    return Array.from(map.values());
+  };
+
   // 1. Try Supabase Cloud Database first (so edits made online are visible to everyone!)
   try {
     const sbRes = await fetch(
@@ -231,14 +258,21 @@ async function loadInitialData() {
     if (sbRes.ok) {
       const rows = await sbRes.json();
       if (Array.isArray(rows) && rows.length > 0) {
-        if (Array.isArray(rows[0].gifts) && rows[0].gifts.length > 0) {
-          state.gifts = rows[0].gifts;
-          localStorage.setItem(STORAGE_KEY_GIFTS, JSON.stringify(state.gifts));
-        }
+        const cloudGifts = Array.isArray(rows[0].gifts) ? rows[0].gifts : [];
+        const merged = mergeGiftLists(cloudGifts, localItems);
+        state.gifts = merged;
+        localStorage.setItem(STORAGE_KEY_GIFTS, JSON.stringify(state.gifts));
+
         if (rows[0].profile && Object.keys(rows[0].profile).length > 0) {
           state.profile = { ...DEFAULT_PROFILE, ...rows[0].profile };
           localStorage.setItem(STORAGE_KEY_PROFILE, JSON.stringify(state.profile));
         }
+
+        // If local browser had items that weren't in Supabase yet, push them to Supabase immediately!
+        if (merged.length > cloudGifts.length) {
+          persistGifts();
+        }
+
         // Check if local server is also running
         fetch("/api/gifts", { method: "HEAD" })
           .then((r) => {
@@ -253,16 +287,12 @@ async function loadInitialData() {
     console.warn("Supabase non joignable, fallback local", e);
   }
 
-  // 2. Try localStorage if available
-  let localItems = null;
-  try {
-    const raw =
-      localStorage.getItem(STORAGE_KEY_GIFTS) ||
-      localStorage.getItem("noel_wishlist_gifts_v1");
-    if (raw) {
-      localItems = JSON.parse(raw);
-    }
-  } catch (e) {}
+  // 2. If localStorage has items, prefer them over static gifts.json
+  if (localItems.length > 0) {
+    state.gifts = localItems;
+    renderAll();
+    return;
+  }
 
   // 3. Try Python API (/api/gifts)
   try {
