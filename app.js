@@ -259,8 +259,11 @@ async function loadInitialData() {
       const rows = await sbRes.json();
       if (Array.isArray(rows) && rows.length > 0) {
         const cloudGifts = Array.isArray(rows[0].gifts) ? rows[0].gifts : [];
-        const merged = mergeGiftLists(cloudGifts, localItems);
-        state.gifts = merged;
+        const finalGifts =
+          localItems.length > cloudGifts.length
+            ? mergeGiftLists(cloudGifts, localItems)
+            : cloudGifts;
+        state.gifts = finalGifts;
         localStorage.setItem(STORAGE_KEY_GIFTS, JSON.stringify(state.gifts));
 
         if (rows[0].profile && Object.keys(rows[0].profile).length > 0) {
@@ -269,7 +272,7 @@ async function loadInitialData() {
         }
 
         // If local browser had items that weren't in Supabase yet, push them to Supabase immediately!
-        if (merged.length > cloudGifts.length) {
+        if (finalGifts.length > cloudGifts.length) {
           persistGifts();
         }
 

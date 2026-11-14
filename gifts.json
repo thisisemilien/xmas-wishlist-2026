@@ -1,23 +1,32 @@
 [
   {
-    "id": "gift-1794166727820",
-    "title": "T-shirt Henley slim manches longues coton côtelé",
-    "category": "Mode & Accessoires",
+    "id": "gift-1794668792569",
+    "title": "Vinyle : Adele - 30",
+    "category": "Culture & Livres",
     "priority": "Idée cadeau",
-    "image": "https://media.cos.com/assets/001/53/dd/53dd4a622aa4cf8b48633dc04515ddf7199cddaf_xxl-1.jpg?imwidth=1260",
-    "color": "Écru",
-    "size": "XS",
-    "imageFit": "portrait",
+    "image": "https://m.media-amazon.com/images/I/51jre2TQoCL._UF894,1000_QL80_.jpg",
+    "color": "Blanc",
+    "size": "",
+    "imageFit": "contain",
     "description": "",
     "stores": [
       {
-        "name": "Cos",
-        "price": 38.25,
-        "originalPrice": 45,
-        "discountPercent": 15,
-        "promoCode": "UNIJ5W4KP2UW3MGE13",
+        "name": "Vinted",
+        "price": 30,
+        "originalPrice": 30,
+        "discountPercent": 0,
+        "promoCode": "",
         "promoEndDate": "",
-        "url": "https://www.cos.com/fr-fr/men/menswear/tshirts/slim-fit/product/slim-ribbed-cotton-long-sleeved-henley-t-shirt-off-white-1333150004"
+        "url": "https://www.vinted.fr/items/8341196113-adele-30-vinyl"
+      },
+      {
+        "name": "Vinted",
+        "price": 31.49,
+        "originalPrice": 31.49,
+        "discountPercent": 0,
+        "promoCode": "",
+        "promoEndDate": "",
+        "url": "https://www.vinted.fr/items/7909988919-adele-30"
       }
     ]
   },
@@ -34,9 +43,9 @@
     "stores": [
       {
         "name": "Bobbies",
-        "price": 160,
+        "price": 120,
         "originalPrice": 200,
-        "discountPercent": 20,
+        "discountPercent": 40,
         "promoCode": "",
         "promoEndDate": "",
         "url": "https://www.bobbies.com/fr/4000784845-77950-gaetano-noir-intense.html#/139-tailles-41"
@@ -92,8 +101,8 @@
     "title": "Coque Tissage Technique -  iPhone 18 Pro Max",
     "category": "Tech & Audio",
     "priority": "Idée cadeau",
-    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MKD14_AV2?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=NVVzVGNXcm5LcHFqcUIwVnhnK1p6RlZya2lKWlJmUEwrYndWOTJiVWJWQUYwVmtIbGRkS25RMVpBRlo0bk5DUUUxL2pOT0FwamJmTG91SERtOUdGc2c",
-    "color": "Bourgogne",
+    "image": "https://m.media-amazon.com/images/W/BW_MEDIAX_AVIF_MEASUREMENT_1306696-T4/images/I/81U5h2znJqL._AC_SL1500_.jpg",
+    "color": "Taupe",
     "size": "",
     "imageFit": "contain",
     "description": "",
@@ -105,13 +114,13 @@
         "discountPercent": 14,
         "promoCode": "",
         "promoEndDate": "",
-        "url": "https://www.amazon.fr/Apple-Tissage-Technique-MagSafe-iPhone/dp/B0HJ9QMTYM/ref=sr_1_5?__mk_fr_FR=ÅMÅŽÕÑ&crid=11AMRI8M5VILD&dib=eyJ2IjoiMSJ9.bmJMxXuhLdfnSsF_VD52xKE1aE8F3E4NAUJfBjbM-hMsxhk6friOKEzrUr-z2QXEk_EsvF3HM-YdEnnmR4C3nOCULCYB7fde6euXDa12ufHxwzkvGUts3Q8z4Cud3vOPTcRjWAdBtVLIb3n2hhiuxdB05qm4azskw8QgcZMnDxNSOQUqQZ4sXu10C1rPgM4qmQDLRS7jNViLugAGzWfk4UUaYS1h1HhcxwYqCZine5fGlrO99Kn6y1-0JGUE0ukJP02CDcmU0sUPRUDHwSf46F6urKkb_tA18Gt2t98mGLg.qR8zyqxbw9WfKqP2kFn9RFr-bf8b29HVUyspvkEJuH8&dib_tag=se&keywords=Coque%2BiPhone%2B18%2BPro%2BMax&qid=1794162238&s=electronics&sprefix=coque%2Biphone%2B18%2Bpro%2Bmax%2Celectronics%2C155&sr=1-5&th=1"
+        "url": "https://www.amazon.fr/Apple-Tissage-Technique-MagSafe-iPhone/dp/B0HJ9ZWQ65/ref=sr_1_5?th=1"
       }
     ]
   },
   {
     "id": "gift-1794667700001",
-    "title": "Écouteurs sans fil AirPods Pro 3",
+    "title": "AirPods Pro 3",
     "category": "Tech & Audio",
     "priority": "Idée cadeau",
     "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/airpods-pro-3-hero-select-202509_FMT_WHH?wid=752&hei=636&fmt=jpeg&qlt=90&.v=1758077264181",
@@ -122,9 +131,9 @@
     "stores": [
       {
         "name": "Carrefour",
-        "price": 249.99,
+        "price": 149.99,
         "originalPrice": 279,
-        "discountPercent": 10,
+        "discountPercent": 46,
         "promoCode": "",
         "promoEndDate": "",
         "url": "https://www.carrefour.fr/p/ecouteurs-sans-fil-airpods-pro-3-apple-0195950543742?s=7006"
@@ -133,10 +142,10 @@
   },
   {
     "id": "gift-1794667700002",
-    "title": "The Weeknd — The Highlights (Vinyle 2xLP)",
+    "title": "Vinyle : The Weeknd — The Highlights",
     "category": "Culture & Livres",
     "priority": "Idée cadeau",
-    "image": "https://i.discogs.com/G8qaE6WyOpq25lBxGgveYoh1lMEdE2n5qt6mgkigUy8/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIxMDQ0/NzEzLTE2Mzc1NjQx/MTQtODE5Ny5qcGVn.jpeg",
+    "image": "https://i.ebayimg.com/00/s/MTQwMFgxNDAw/z/GsoAAOSwnBVhYHPm/$_57.JPG?set_id=8800005007",
     "color": "Rouge (Édition Limitée)",
     "size": "",
     "imageFit": "contain",
@@ -145,8 +154,8 @@
       {
         "name": "Discogs",
         "price": 24.5,
-        "originalPrice": null,
-        "discountPercent": null,
+        "originalPrice": 24.5,
+        "discountPercent": 0,
         "promoCode": "",
         "promoEndDate": "",
         "url": "https://www.discogs.com/shop/item/4438607685"
@@ -161,7 +170,7 @@
     "image": "https://cdn.shopify.com/s/files/1/1011/8339/0034/files/411eba193d8c73cfe2bcc0bce4f181b4c64c4e20.jpg?v=1788520639",
     "color": "Light Heather Grey",
     "size": "S",
-    "imageFit": "portrait",
+    "imageFit": "contain",
     "description": "",
     "stores": [
       {
@@ -183,7 +192,7 @@
     "image": "https://cdn.shopify.com/s/files/1/1011/8339/0034/files/552ecf9c38bc7b5dbddeef59e9a77c1345eb19fb.jpg?v=1788520412",
     "color": "Chalk",
     "size": "S",
-    "imageFit": "portrait",
+    "imageFit": "contain",
     "description": "",
     "stores": [
       {
